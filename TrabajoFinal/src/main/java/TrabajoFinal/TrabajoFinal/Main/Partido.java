@@ -7,17 +7,18 @@ public class Partido {
 	private Equipo equipo2;
 	private int golesEquipo1;
 	private int golesEquipo2;
+	private Ronda ronda;	
 
-	public int getResultadoPartido() { // devuelve el resultado del partido ( 1: ganador equipo1, 2: ganador equipo2,
-										// 3: empate)
-		if (golesEquipo1 > golesEquipo2) {
+	public int getResultadoPartido() { // devuelve el resultado del partido
+		
+		//( 1: ganador equipo1, 2: ganador equipo2, 3: empate)
+		
+		if (golesEquipo1 > golesEquipo2) 
 			return 1;
-		}
-		if (golesEquipo1 < golesEquipo2) {
+		if (golesEquipo1 < golesEquipo2)
 			return 2;
-		} else {
+		else
 			return 3;
-		}
 	}
 
 	@Override
@@ -35,17 +36,19 @@ public class Partido {
 		}
 
 		if (golesEquipo1 == golesEquipo2) {
-			resultado = "el resultado fué un empate con un resultado de " + golesEquipo1 + " a " + golesEquipo2;
+			resultado = "empate con un resultado de " + golesEquipo1 + " a " + golesEquipo2;
 		}
 
 		return resultado;
 	}
 
-	public Partido(Equipo equipo1, Equipo equipo2, int golesEquipo1, int golesEquipo2) {
+	public Partido(int idPartido, Equipo equipo1, Equipo equipo2, int golesEquipo1, int golesEquipo2, Ronda ronda) {
+		this.idPartido = idPartido;
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
 		this.golesEquipo1 = golesEquipo1;
 		this.golesEquipo2 = golesEquipo2;
+		this.ronda = ronda;
 	}
 
 	public Partido() {
@@ -89,5 +92,13 @@ public class Partido {
 
 	public void setGolesEquipo2(int golesEquipo2) {
 		this.golesEquipo2 = golesEquipo2;
+	}
+	
+	public Ronda getRonda() {
+		return ronda;
+	}
+
+	public void setRonda(Ronda ronda) {
+		this.ronda = ronda;
 	}
 }

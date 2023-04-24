@@ -8,10 +8,11 @@ public class Equipo {
 
 	@Override
 	public String toString() {
-		return "Equipo: " + nombre + "\n" + "Año de fundación: " + anioFundacion;
+		return nombre;
 	}
 
-	public Equipo(String nombre, int anioFundacion) {
+	public Equipo(int idEquipo, String nombre, int anioFundacion) {
+		this.idEquipo = idEquipo;
 		this.nombre = nombre;
 		this.anioFundacion = anioFundacion;
 	}

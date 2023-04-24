@@ -7,13 +7,13 @@ public class Pronostico {
 	private Partido partido;
 	private int resultadoPronostico;
 
-	private String resultado() {
+	private String resultado() { // ( 1: ganador equipo1, 2: ganador equipo2, 3: empate)
 		String resultado = "";
 
-		if (partido.getGolesEquipo1() > partido.getGolesEquipo2()) {
+		if (resultadoPronostico == 1) {
 			resultado = "ganador " + partido.getEquipo1();
 		}
-		if (partido.getGolesEquipo1() < partido.getGolesEquipo2()) {
+		if (resultadoPronostico == 2) {
 			resultado = "ganador " + partido.getEquipo2();
 		} else {
 			resultado = "empate";
@@ -24,7 +24,7 @@ public class Pronostico {
 
 	@Override
 	public String toString() {
-		return persona.toString() + "pronostica que el resultado es: " + resultado();
+		return persona.toString() + " pronostica que el resultado es: " + resultado();
 	}
 
 	public Pronostico(int idPronostico, Persona persona, Partido partido, int resultadoPronostico) {
