@@ -19,7 +19,6 @@ public class GestorBD {
 
 	
 	
-	
 	public ArrayList<Persona> listaPersonas() {
 
 		ArrayList<Persona> lista = new ArrayList<Persona>();
@@ -52,44 +51,60 @@ public class GestorBD {
 		return lista;
 	}
 	
-	public ArrayList<Partido> listaPartidos() {
+	
+	
+	public ArrayList<Pronostico> listaPronosticos() {
 
-		ArrayList<Partido> lista = new ArrayList<Partido>();
+		ArrayList<Pronostico> lista = new ArrayList<Pronostico>();
 
 		try {
 
 			Connection con = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from todos_los_partidos");
+			ResultSet rs = stmt.executeQuery("select * from todos_los_pronosticos");
 
 			while (rs.next()) {
 
-				int idPartido = rs.getInt(1);
+				int idPronostico = rs.getInt(1);
 				
-				Equipo equipo1 = new Equipo(
+				Persona persona = new Persona(
 						rs.getInt(2),
 						rs.getString(3),
-						rs.getInt(4)
+						rs.getString(4),
+						rs.getInt(5)
+						);
+				
+				int idPartido = rs.getInt(6);
+				
+				Equipo equipo1 = new Equipo(
+						rs.getInt(7),
+						rs.getString(8),
+						rs.getInt(9)
 						);
 				
 				Equipo equipo2 = new Equipo(
-						rs.getInt(5),
-						rs.getString(6),
-						rs.getInt(7)
+						rs.getInt(10),
+						rs.getString(11),
+						rs.getInt(12)
 						);
 				
-				int golesEquipo1 = rs.getInt(8);
-				int golesEquipo2 = rs.getInt(9);
+				int golesEquipo1 = rs.getInt(13);
+				int golesEquipo2 = rs.getInt(14);
 				
 				Ronda ronda = new Ronda(
-						rs.getInt(10),
-						rs.getInt(11),
-						rs.getInt(12),
-						rs.getString(13)
+						rs.getInt(15),
+						rs.getInt(16),
+						rs.getInt(17),
+						rs.getString(18)
 						);
 
-				Partido p = new Partido(idPartido, equipo1, equipo2, golesEquipo1, golesEquipo2, ronda);
-				lista.add(p);
+				int resultadoPronostico = rs.getInt(19);
+				
+				Partido partido = new Partido(idPartido, equipo1, equipo2, golesEquipo1, golesEquipo2, ronda);
+				
+				Pronostico pronostico = new Pronostico(idPronostico, persona, partido, resultadoPronostico);
+				
+				lista.add(pronostico);
 			}
 
 			rs.close();
