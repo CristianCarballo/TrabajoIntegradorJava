@@ -19,6 +19,40 @@ public class GestorBD {
 
 	
 	
+	public ArrayList<Ronda> listaRondas() {
+
+		ArrayList<Ronda> lista = new ArrayList<Ronda>();
+
+		try {
+
+			Connection con = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT id_ronda, numero_ronda, f.id_fase, nombre FROM ronda r join fase f on r.id_fase = f.id_fase");
+
+			while (rs.next()) {
+
+				int id = rs.getInt(1);
+				int numeroRonda = rs.getInt(2);
+				int idFase = rs.getInt(3);
+				String nombreFase = rs.getString(4);
+
+				Ronda r = new Ronda(id, numeroRonda, idFase, nombreFase);;
+				lista.add(r);
+			}
+
+			rs.close();
+			stmt.close();
+			con.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		return lista;
+	}
+	
+	
+	
 	public ArrayList<Persona> listaPersonas() {
 
 		ArrayList<Persona> lista = new ArrayList<Persona>();
